@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\product_attributes;
+use App\Models\Subcategory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class ShopController extends Controller
+{
+    public function Index()
+    {
+        if (Auth::check()) {
+            // logged-in
+            $categories = Category::with('subcategory')->get();
+            $products = Product::with('Attributes')->paginate(45);
+            return view('fontend.shop',compact('categories', 'products'))->with('user', Auth::user());
+        } else {
+            // not logged-in
+            $categories = Category::with('subcategory')->get();
+            $products = Product::with('Attributes')->paginate(45);
+            return view('fontend.shop',compact('categories', 'products'));
+        }
+    }
+}

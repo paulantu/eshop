@@ -1,0 +1,34 @@
+.page-title{
+    padding-left: 30px;
+    background: #4B49AC;
+}
+.page-title h3{
+    padding-left: 10px;
+    line-height: 70px;
+    color: #ffffff;
+}
+.add button{
+    float: right;
+}
+.add a{
+    float: right;
+    margin-right: 20px;
+}
+.tb-image td img{
+    height: 50px;
+    width: 50px;
+    border-radius: 0px;
+}
+.upimg img{
+    height: 50px;
+    width: 50px;
+    border-radius: 0px;
+}
+.proimgview{
+    display: inline-block;
+    margin-left: 7px;
+}
+.proimgview img{
+    height: 100px;
+    width: 100px;
+}
