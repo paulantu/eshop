@@ -32,3 +32,8 @@
     height: 100px;
     width: 100px;
 }
+.storeLogoView img{
+    height: 50px!important;
+    width: 50px!important;
+    border-radius: 0px!important;
+}

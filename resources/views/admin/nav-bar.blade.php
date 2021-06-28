@@ -1,7 +1,12 @@
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="{{ url('/')}}"><img src="{{ asset('backend/images/logo.svg')}}" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="{{ url('/')}}"><img src="{{ asset('backend/images/logo-mini.svg')}}" alt="logo"/></a>
+        @php
+        $siteLogo = \App\Models\LogoHistory::latest('updated_at')->firstWhere('status', 1);
+        @endphp
+        <a class="navbar-brand brand-logo mr-5" href="{{ url('/')}}">@if($siteLogo == true)<img src="{{ asset($siteLogo->logo)}}" class="mr-2" alt="logo"/>@else
+                <i class="brand-logo">aPaul</i>@endif</a>
+        <a class="navbar-brand brand-logo-mini" href="{{ url('/')}}">@if($siteLogo == true)<img src="{{ asset($siteLogo->logo)}}" alt="logo"/>@else
+                <i class="brand-logo">aPaul</i>@endif</a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

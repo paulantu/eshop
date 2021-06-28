@@ -126,10 +126,16 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
+            <a class="nav-link" data-toggle="collapse" href="#siteSetting" aria-expanded="false" aria-controls="form-elements">
                 <i class="ti-settings menu-icon"></i>
                 <span class="menu-title">Site setting</span>
+                <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="siteSetting">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.mystore.logo')}}">Logo setup</a></li>
+                </ul>
+            </div>
         </li>
     </ul>
 </nav>

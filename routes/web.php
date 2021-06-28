@@ -115,9 +115,15 @@ Route::get('admin/product/view/{id}',[\App\Http\Controllers\Admin\ProductControl
 
 
 
+///////////////////////////////////////////////////////for site setting
 
-
-
+//    logo Setting part
+    Route::get('admin/mystore/logo',[\App\Http\Controllers\Admin\SiteSettingController::class, 'Index'])->name('admin.mystore.logo');
+    Route::post('admin/mystore/logo/store', [\App\Http\Controllers\Admin\SiteSettingController::class, 'Store'])->name('admin.mystore.logo.store');
+    Route::get('admin/mystore/logo/view/{id}',[\App\Http\Controllers\Admin\SiteSettingController::class,'ViewLogo']);
+//    logo status change
+    Route::get('admin/mystore/logo/active/{id}', [\App\Http\Controllers\Admin\SiteSettingController::class, 'Active']);
+    Route::get('admin/mystore/logo/inactive/{id}', [\App\Http\Controllers\Admin\SiteSettingController::class, 'Inactive']);
 
 
 
