@@ -18,9 +18,7 @@ class product_attributes extends Model
     ];
 
     public function Product(){
-            return $this->hasOne(Product::class, 'id', 'product_id');
+            return $this->belongsTo(Product::class);
     }
-    public function Products(){
-        return $this->belongsTo(Product::class);
-    }
+
 }

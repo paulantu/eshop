@@ -27,3 +27,37 @@
 
     //add product subcategory dependency dropdown end
 
+
+
+
+
+
+
+    //add Shipping District dependency dropdown start
+
+
+    $(document).ready(function(){
+        $('select[name="divisionName"]').on('change', function(){
+            var divisionName = $(this).val();
+            if(divisionName) {
+                jQuery.ajax({
+                    url:'/districtdependency/' + divisionName,
+                    type: "GET",
+                    dataType: "json",
+
+                    success:function(data){
+                        $('select[name="districtName"]').empty('select District');
+                        jQuery.each(data, function(key, value){
+                            $('select[name="districtName"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                    }
+                });
+            }
+            else{
+                // $('select[name="subcat_id"]').empty();
+                alert('danger');
+            }
+        });
+    });
+
+    //add Shipping District dependency dropdown end

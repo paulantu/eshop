@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class WishlistController extends Controller
 {
+
+
+
+//    add product to wishlist
+
    public function AddToWishlist(Request $request,$id){
        $user_id = Auth::id();
        $check_data = Wishlist::where('user_id', $user_id)->where('product_id', $id)->first();
@@ -36,15 +41,27 @@ class WishlistController extends Controller
 
 
 
+
+
+
+//   wishlist item count
+
+    public function wishItem(){
+       $items = Wishlist::where('user_id', Auth::id())->count();
+       return response()->json(array('wishItem' => $items));
+    }
+
+
+
+
+
+
+
+//my wishlist page for user
    public function GetMyWishlistData(){
 
        if (Auth::check()) {
-           $WishData = DB::table('products')
-               ->join('wishlists', 'products.id', '=', 'wishlists.product_id')
-               ->select('products.*', 'wishlists.*')
-               ->where('wishlists.user_id','=',Auth::id())
-               ->get();
-           return view('fontend.wishlist', compact('WishData'));
+           return view('fontend.wishlist');
        }else{
            return redirect()->back()->with('alert', 'Log in first!');
        }
@@ -52,8 +69,24 @@ class WishlistController extends Controller
 
 
 
+
+
+
+//   wish product show
+
+   public function ShowWishlistData(){
+       $WishData = Wishlist::with('WishProduct')->where('user_id',Auth::id())->latest()->get();
+       return response()->json($WishData);
+   }
+
+
+
+
+
+//   Delete wish Product
+
    public function Destroy($wish_pro_id){
-       $remove = Wishlist::where('user_id',Auth::id())->where('product_id',$wish_pro_id)->forceDelete();
+       $remove = Wishlist::where('user_id',Auth::id())->where('id',$wish_pro_id)->forceDelete();
        if ($remove){
            return response()->json(['success' => 'Product successfully removed from wishlist']);
        }

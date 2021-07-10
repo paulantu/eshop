@@ -11,17 +11,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
-    public function Index()
+    public function Index(Request $request)
     {
         if (Auth::check()) {
             // logged-in
+
             $categories = Category::with('subcategory')->get();
-            $products = Product::with('Attributes')->paginate(45);
+            $products = Product::with('ProductAttributes')->where('status', 1)->latest()->paginate(12);
+            if ($request->ajax()){
+                $view = view('data',compact('products'))->render();
+                return response()->json(['html'=>$view]);
+            }
+
             return view('fontend.shop',compact('categories', 'products'))->with('user', Auth::user());
         } else {
             // not logged-in
             $categories = Category::with('subcategory')->get();
-            $products = Product::with('Attributes')->paginate(45);
+            $products = Product::with('ProductAttributes')->where('status', 1)->latest()->paginate(12);
+            if ($request->ajax()){
+                $view = view('data',compact('products'))->render();
+                return response()->json(['html'=>$view]);
+            }
             return view('fontend.shop',compact('categories', 'products'));
         }
     }

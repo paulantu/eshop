@@ -88,13 +88,13 @@
                                                 @endif
 
                                             </td>
-                                            <td>
+                                            <td class="logo-table-body" >
                                                 @if($row->status == 1)
                                                     <a href="{{url ('admin/mystore/logo/inactive/' . $row->id)}}" type="button" title="Change status" class="btn btn-sm btn-info"><i class="ti-face-sad"></i></a>
                                                 @else
                                                     <a href="{{url ('admin/mystore/logo/active/' . $row->id)}}" type="button" title="Change status" class="btn btn-sm btn-warning"><i class="ti-face-smile"></i></a>
                                                 @endif
-                                                <a href="{{url ('admin/mystore/logo/view/' . $row->id)}}" type="button" title="View" class="btn btn-sm btn-success"><i class="ti-eye"></i></a>
+                                                <a href="{{asset($row->logo)}}" type="button" title="View" class="btn btn-sm btn-success"><i class="ti-eye"></i></a>
                                                 <a href="{{url ('admin/mystore/logo/delete/' . $row->id)}}" type="button" title="Trash" class="btn btn-sm btn-danger"><i class="ti-trash"></i></a>
                                             </td>
                                         </tr>

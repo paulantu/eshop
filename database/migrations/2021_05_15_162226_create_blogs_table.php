@@ -24,6 +24,7 @@ class CreateBlogsTable extends Migration
             $table->string('author');
             $table->string('tag')->nullable();
             $table->string('image')->nullable();
+            $table->string('status');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->foreign('blog_cat_id')->references('id')->on('blog_categories');

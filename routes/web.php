@@ -13,17 +13,52 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//////////////////////////////////////// for user fontend
+
+
+
+//home page view
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'Index']);
 
-
-// for fontend
+//shop page view
 Route::get('/shop',[\App\Http\Controllers\ShopController::class, 'Index']);
+
+//product details view
+Route::get('/shop/{category}/{p_code}/{slug}',[\App\Http\Controllers\User\ProductDetailsController::class, 'Index']);
+
+//for subscription
 Route::Post('newsletter/store',[\App\Http\Controllers\Admin\NewsLetterController::class,'Store'])->name('newsletter.store');
+
+//blog page view
 Route::get('/blog',[\App\Http\Controllers\BlogController::class,'Index']);
+
+//contact us page view
 Route::get('/contact-us',[\App\Http\Controllers\ContactController::class,'Index']);
+
 Route::get('/add-to-wishlist/{id}',[\App\Http\Controllers\User\WishlistController::class,'AddToWishlist']);
+
+//show wishlist data item(ajax)
+Route::get('/wishlist/product',[\App\Http\Controllers\User\WishlistController::class,'wishItem']);
+
+//wishlist view page
 Route::get('/my-wishlist',[\App\Http\Controllers\User\WishlistController::class,'GetMyWishlistData']);
-Route::get('/my-wishlist/remove/{wish_pro_id}',[\App\Http\Controllers\User\WishlistController::class,'Destroy']); //not working
+
+//wishlist product show (ajax)
+Route::get('/wishlist/product/show',[\App\Http\Controllers\User\WishlistController::class,'ShowWishlistData']);
+
+//delete wishlist data (ajax)
+Route::get('/wishlist/remove/{wish_pro_id}',[\App\Http\Controllers\User\WishlistController::class,'Destroy']);
+
+//product add to cart(ajax)
+Route::post('/cart/product/store/{id}',[\App\Http\Controllers\User\AddToCartController::class, 'AddToCart']);
+
+//cart product view in mini(ajax)
+Route::get('/cart/mini/product',[\App\Http\Controllers\User\AddToCartController::class, 'ViewCart']);
+
+//cart remove from cart list(ajax)
+Route::get('/cart/remove/{cart_id}',[\App\Http\Controllers\User\AddToCartController::class, 'RemoveFromCartList']);
+
 
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
@@ -80,9 +115,10 @@ Route::middleware(['auth:sanctum', 'verified', 'auth_admin'])->group(function(){
 
     Route::get('admin/product/attributes/{id}',[\App\Http\Controllers\Admin\ProductController::class, 'AddAttributes']);
     Route::post('admin/product/attributes/store/{id}',[\App\Http\Controllers\Admin\ProductController::class, 'AttributesStore']);
-//    Route::get('admin/product/attributes/edit/{id}/{att_id}',[\App\Http\Controllers\Admin\ProductController::class, 'AttributesEdit']);
-//    Route::put('admin/product/attributes/update/{pro_id}/{id}',[\App\Http\Controllers\Admin\ProductController::class, 'AttributesUpdate']);
-Route::get('admin/product/view/{id}',[\App\Http\Controllers\Admin\ProductController::class,'ViewProduct']);
+    Route::get('admin/product/attributes/edit/{id}',[\App\Http\Controllers\Admin\ProductController::class, 'AttributesEdit']);
+//    /{att_id}
+    Route::put('admin/product/attributes/update/{id}',[\App\Http\Controllers\Admin\ProductController::class, 'AttributesUpdate']);
+    Route::get('admin/product/view/{id}',[\App\Http\Controllers\Admin\ProductController::class,'ViewProduct']);
 //    product change status
     Route::get('admin/product/active/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'Active']);
     Route::get('admin/product/inactive/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'Inactive']);
@@ -98,8 +134,6 @@ Route::get('admin/product/view/{id}',[\App\Http\Controllers\Admin\ProductControl
     Route::post('admin/coupon/store', [\App\Http\Controllers\Admin\CouponController::class, 'Store'])->name('admin.coupon.store');
     Route::get('admin/coupon/edit/{id}', [\App\Http\Controllers\Admin\CouponController::class, 'Edit']);
     Route::put('admin/coupon/update/{id}', [\App\Http\Controllers\Admin\CouponController::class, 'Update']);
-    Route::get('admin/coupon/trash/{id}', [\App\Http\Controllers\Admin\CouponController::class, 'SoftDelete']);
-    Route::get('admin/coupon/restore/{id}', [\App\Http\Controllers\Admin\CouponController::class, 'Restore']);
     Route::get('admin/coupon/destroy/{id}', [\App\Http\Controllers\Admin\CouponController::class, 'Destroy']);
 
 
@@ -115,12 +149,45 @@ Route::get('admin/product/view/{id}',[\App\Http\Controllers\Admin\ProductControl
 
 
 
+
+    //    for Shipping Division part
+    Route::get('admin/shipping/division', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'Index'])->name('admin.shipping.division');
+    Route::post('admin/shipping/division/store', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'Store'])->name('admin.shipping.division.store');
+    Route::get('admin/shipping/division/edit/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'Edit']);
+    Route::put('admin/shipping/division/update/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'Update']);
+    Route::get('admin/shipping/division/delete/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'Destroy']);
+
+
+
+
+    //    for Shipping Division part
+    Route::get('admin/shipping/district', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'DistrictView'])->name('admin.shipping.district');
+    Route::post('admin/shipping/district/store', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'DistrictStore'])->name('admin.shipping.district.store');
+    Route::get('admin/shipping/district/edit/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'DistrictEdit']);
+    Route::put('admin/shipping/district/update/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'DistrictUpdate']);
+    Route::get('admin/shipping/district/delete/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'DistrictDestroy']);
+
+
+
+
+
+    //    for Shipping Division part
+    Route::get('admin/shipping/thana', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'ThanaView'])->name('admin.shipping.thana');
+    Route::get('districtdependency/{district_id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'Districtdependency']);
+    Route::post('admin/shipping/thana/store', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'ThanaStore'])->name('admin.shipping.thana.store');
+    Route::get('admin/shipping/thana/edit/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'ThanaEdit']);
+    Route::put('admin/shipping/thana/update/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'ThanaUpdate']);
+    Route::get('admin/shipping/thana/delete/{id}', [\App\Http\Controllers\Admin\ShippingAreaController::class, 'ThanaDestroy']);
+
+
+
+
 ///////////////////////////////////////////////////////for site setting
 
 //    logo Setting part
     Route::get('admin/mystore/logo',[\App\Http\Controllers\Admin\SiteSettingController::class, 'Index'])->name('admin.mystore.logo');
     Route::post('admin/mystore/logo/store', [\App\Http\Controllers\Admin\SiteSettingController::class, 'Store'])->name('admin.mystore.logo.store');
-    Route::get('admin/mystore/logo/view/{id}',[\App\Http\Controllers\Admin\SiteSettingController::class,'ViewLogo']);
+    Route::get('admin/mystore/logo/delete/{id}',[\App\Http\Controllers\Admin\SiteSettingController::class,'Destroy']);
 //    logo status change
     Route::get('admin/mystore/logo/active/{id}', [\App\Http\Controllers\Admin\SiteSettingController::class, 'Active']);
     Route::get('admin/mystore/logo/inactive/{id}', [\App\Http\Controllers\Admin\SiteSettingController::class, 'Inactive']);

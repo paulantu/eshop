@@ -118,55 +118,34 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="description">Description</label>
-                                                <textarea type="text" class="form-control" name="description"
-                                                          id="description" value="" aria-describedby="description"
-                                                          placeholder="Enter description"></textarea>
 
-                                                @error('description')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="thumbnail">Thumbnail</label>
-                                                <input type="file" name="thumbnail" id="thumbnail"
-                                                       class="file-upload-default">
-                                                <div class="input-group col-xs-12">
-                                                    <input type="text" class="form-control file-upload-info" disabled
-                                                           placeholder="Upload thumbnail">
-                                                    <span class="input-group-append">
-                                                        <button class="file-upload-browse btn btn-primary"
-                                                                type="button">Choose thumbnail</button>
-                                                    </span>
-                                                </div>
-
-                                                @error('thumbnail')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                                <div class="thumbnail_preview" id="thumbnail_preview">
-
-                                                </div>
-
-                                            </div>
-                                        </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label for="images"> Image</label>
                                                 <input type="file" name="images[]" id="images" class="form-control" multiple="multiple">
                                             </div>
-                                                @error('images')
+                                            @error('images')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                            <div class="image_preview" id="image_preview">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="product_description">Description</label>
+                                                <textarea class="form-control" name="product_description"
+                                                          id="product_description" value="" aria-describedby="product_description"
+                                                          placeholder="Enter description"></textarea>
+
+                                                @error('product_description')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
-                                                <div class="image_preview" id="image_preview">
-                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
 
                                     <div class="row">

@@ -19,8 +19,8 @@ class Category extends Model
     public function user(){
         return $this->hasOne(User::class, 'id', 'created_by');
     }
-
     public function subcategory(){
-        return $this->hasMany('App\Models\Subcategory');
+        return $this->hasMany(Subcategory::class);
     }
+
 }

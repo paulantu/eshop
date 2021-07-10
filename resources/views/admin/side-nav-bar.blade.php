@@ -76,6 +76,20 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#shipping_area" aria-expanded="false" aria-controls="icons">
+                <i class="ti-shopping-cart-full menu-icon"></i>
+                <span class="menu-title">Shiping Srea</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="shipping_area">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('admin/shipping/division') }}">Division</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('admin/shipping/district') }}">District</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ url('admin/shipping/thana') }}">Thana</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                 <i class="ti-truck menu-icon"></i>
                 <span class="menu-title">Return Order</span>

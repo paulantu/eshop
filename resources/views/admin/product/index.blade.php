@@ -38,7 +38,10 @@
                                             <td>{{ $row->qty }}</td>
                                             <td>{{ $row->Product->selling_price }}</td>
                                             <td>{{ $row->Product->discount }}</td>
-                                            <td><img src="{{ asset($row->Product->thumbnail) }}" alt="brand logo"></td>
+                                            @php
+                                                $image = json_decode($row->Product->images);
+                                            @endphp
+                                            <td><img src="{{ asset($image[0]) }}" alt="brand logo"></td>
                                             <td>
                                                 @if ($row->Product->status == 1)
                                                     <span class="badge badge-primary">Active</span>
@@ -48,7 +51,23 @@
 
                                             </td>
                                             <td>
-                                                <a href="{{url('admin/product/edit/' . $row->Product->id)}}" type="button" title="Edit" class="btn btn-sm btn-primary"><i class="ti-marker-alt"></i></a>
+                                                <a class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="editDropdown" title="Edit">
+                                                    <i class="ti-marker-alt">
+                                                    </i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                                     aria-labelledby="editDropdown">
+                                                    <a class="dropdown-item"
+                                                       href="{{ url('admin/product/edit/'.$row->product->id) }}">
+                                                        <i class="ti-marker-alt text-primary"></i>
+                                                        Edit Product
+                                                    </a>
+                                                    <a class="dropdown-item"
+                                                       href="{{ url('admin/product/edit/'.$row->product->id) }}">
+                                                        <i class="ti-marker-alt text-primary"></i>
+                                                        Edit Attribute
+                                                    </a>
+                                                </div>
                                                 <a href="{{url ('admin/product/trash/' . $row->Product->id.'/'.$row->id)}}" type="button" title="Trash" class="btn btn-sm btn-danger"><i class="ti-trash"></i></a>
                                                 <a href="{{url ('admin/product/view/' . $row->Product->id)}}" type="button" title="View" class="btn btn-sm btn-success"><i class="ti-eye"></i></a>
                                                 @if($row->Product->status == 1)

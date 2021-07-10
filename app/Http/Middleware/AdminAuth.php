@@ -23,7 +23,7 @@ class AdminAuth
 //            return $next($request);
 //        }else{
 //            session()->flash('welcome to eshop.');
-//            return redirect('/login');
+//            return redirect()->route('login');
 //        }
 
 
@@ -38,7 +38,7 @@ class AdminAuth
         }
 
 
-//
-//        return $next($request);
+
+        return $next($request);
     }
 }

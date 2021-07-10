@@ -98,6 +98,29 @@ class SiteSettingController extends Controller
 
 
 
+    public function Destroy($id){
+        $destroyLogo = LogoHistory::find($id);
+        if(file_exists( $destroyLogo->logo)){
+            unlink( $destroyLogo->logo);
+        }
+        $destroyLogo-> forceDelete();
+
+        if ($destroyLogo == true){
+            $notification = array(
+                'message' => 'logo deleted successfully',
+                'alert-type' => 'success'
+            );
+            return Redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'something went wrong',
+                'alert-type' => 'error'
+            );
+            return Redirect()->back()->with($notification);
+        }
+    }
+
+
 
 
 

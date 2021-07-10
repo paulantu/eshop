@@ -1,3 +1,25 @@
+.header__right__auth li.current_user_name{
+    display: block;
+}
+.header__right__auth li.current_user_name ul.user_menu_dropdown{
+    display: none;
+    border: 1px solid #aa1111;
+}
+.header__right__auth li.current_user_name:hover ul.user_menu_dropdown{
+    display: block!important;
+    position: absolute;
+    text-align: center!important;
+    z-index: 9;
+}
+.user_menu_dropdown li{
+    padding: 7px 15px;
+}
+.user_menu_dropdown li:hover{
+    background: #aa1111;
+    color: #fff!important;
+}
+
+
 .product__hover li:hover button {
 	background: #ca1515;
 }
@@ -53,4 +75,92 @@
 .add-to-cart{
     float: right!important;
 }
+.header__right__auth li{
+    list-style: none;
+}
+.header__right__auth li .dropdown{
+    position: relative;
+    display: none;
+    background: #2A3746;
+    z-index: 999;
+}
+.header__right__auth li:hover .dropdown{
+    position: absolute;
+    display: block;
+    float: left!important;
+}
+.header__right__auth li .dropdown li{
+    padding: 10px 5px;
+}
+.header__right__auth li .dropdown li a{
+    padding: 5px 15px;
+}
+.header__right__auth li .dropdown li a:hover{
+    font-size: 12px;
+    float: left!important;
+    color: #fff;
+}
+.product__details__price b{
+    font-weight: 600!important;
+}
 
+
+.cart-dropdown-content{
+    cursor: pointer;
+    padding: 10px;
+    box-shadow: 2px 2px 4px rgba(90, 98, 104, 0.62);
+    margin-top: 27px;
+    position: absolute;
+    left: -171px;
+    display: none;
+}
+.cart-dropdown-content.active{
+    display: block!important;
+    z-index: 999!important;
+}
+.mini-cart-dropdown{
+    position: relative;
+    display: inline-block;
+}
+.cart_drop_product img{
+    height: 40px;
+    width: 40px;
+    padding: 0;
+}
+.cart_drop_product .pro-title{
+    font-size: 11px;
+    color: #5a6268;
+    float: left;
+    padding: 0;
+}
+.cart_drop_product i{
+    font-size: 11px;
+    color: #5a6268;
+    padding: 0;
+}
+.sub-total-area span{
+    font-size: 15px;
+    font-weight: bold;
+    color: #353536;
+}
+.product-checkout a{
+    width: 100%;
+    font-size: 13px!important;
+    background: #0b7dfd;
+    padding: 10px 20px;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+.product-checkout a:hover{
+    color: #0b7dfd;
+    font-weight: bold;
+    background: transparent;
+}
+.pro-title span{
+    font-weight: bold;
+    font-size: 15px;
+    color: #ca1515;
+}

@@ -46,10 +46,13 @@
                                             <div class="form-group">
                                                 <label for="brand_id">Brand</label>
                                                 <select name="brand_id" id="brand_id" class="form-control" aria-describedby="brand_id" >
-                                                    <option value="{{ $products->brand_id }}">{{ $products->Brand->name }}</option>
-                                                    @foreach ($brands as $row)
-                                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                                    @endforeach
+                                                    <option value="@if($products->brand_id == true){{ $products->brand_id }}@else @endif">@if($products->brand == true){{ $products->Brand->name }}@else @endif</option>
+                                                    @if($brands == true)
+                                                            @foreach ($brands as $row)
+                                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                                            @endforeach
+                                                        @else
+                                                    @endif
                                                 </select>
 
                                                 @error('brand_id')

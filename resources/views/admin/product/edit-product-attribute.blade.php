@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <br><br>
-                                <form action="{{ url('admin/product/attributes/update/'.$products->id.'/'.urlencode(http_build_query($attributes->id))) }}" method="POST" id="productForm"
+                                <form action="{{ url('admin/product/attributes/update/'.$products->id) }}" method="POST" id="productForm"
                                       enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class BrandController extends Controller
@@ -23,12 +24,15 @@ class BrandController extends Controller
         $brands = new Brand();
 
         $brands->name = $request->name;
+        $brands->slug = Str::slug($request->name, '-');
         $brands->created_by = Auth::user()->id;
 
         $logo = $request->file('brand_logo');
-        $name_gen = hexdec(uniqid()) . '.' . $logo->getClientOriginalExtension();
-        Image::make($logo)->resize(200,200)->save('Image/brand/'. $name_gen);
-        $brands->brand_logo = 'Image/brand/'. $name_gen;
+        if($logo == true) {
+            $name_gen = hexdec(uniqid()) . '.' . $logo->getClientOriginalExtension();
+            Image::make($logo)->resize(200, 200)->save('Image/brand/' . $name_gen);
+            $brands->brand_logo = 'Image/brand/' . $name_gen;
+        }
 
         $brands->save();
 

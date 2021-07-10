@@ -19,12 +19,12 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('sub_category')->nullable();
             $table->unsignedBigInteger('brand')->nullable();
             $table->string('title');
+            $table->string('slug');
             $table->string('p_code');
             $table->string('discount')->nullable();
             $table->string('selling_price')->nullable();
             $table->string('buying_price')->nullable();
-            $table->string('description')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->longText('description')->nullable();
             $table->string('images')->nullable();
             $table->string('status')->default(0)->nullable();
             $table->timestamps();

@@ -9,6 +9,7 @@ use App\Models\Subcategory;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Brand;
+use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Auth;
 use function Livewire\str;
@@ -75,11 +76,9 @@ class ProductController extends Controller
         $pro_validation = $request->validate([
             'title' => 'required',
             'p_code' => 'required',
-            'thumbnail' => 'required',
         ],
             ['title.required' => 'Please enter product title'],
-            ['p_code.required' => 'Please enter product code'],
-            ['thumbnail.required' => 'Please enter product main image']
+            ['p_code.required' => 'Please enter product code']
     );
 
         $products = new Product();
@@ -88,23 +87,20 @@ class ProductController extends Controller
         $products->sub_category = $request->subcat_id;
         $products->brand = $request->brand_id;
         $products->title = $request->title;
+        $products->slug = Str::slug($request->title, '-');
         $products->p_code = $request->p_code;
         $products->discount = $request->discount;
         $products->selling_price = $request->selling_price;
         $products->buying_price = $request->buying_price;
-        $products->description = $request->description;
+        $products->description = $request->product_description;
 
-        $thumbnail = $request->file('thumbnail');
-        $name_thumbnail = hexdec(uniqid()) . '.' . $thumbnail->getClientOriginalExtension();
-        Image::make($thumbnail)->resize(500,500)->save('Image/product/'. $name_thumbnail);
-        $products->thumbnail = 'Image/product/'. $name_thumbnail;
 
         $images = $request->file('images');
         if($images == true){
             foreach ($images as $image) {
                 $name_image_one = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
                 Image::make($image)->resize(500, 500)->save('Image/product/' . $name_image_one);
-                $imageNames[] = $name_image_one;
+                $imageNames[] = 'Image/product/' . $name_image_one;
             }
 
             $product_images = json_encode($imageNames);
@@ -122,7 +118,9 @@ class ProductController extends Controller
 
     public function AddAttributes($id){
         $products = Product::Find($id);
-        return view('admin.product.product_attribute', compact('products'));
+        $product_images = json_decode($products->images);
+        $image = $product_images[1];
+        return view('admin.product.product_attribute', compact('products','image'));
     }
     public function AttributesStore(Request $request,$id){
         $pro_validation = $request->validate([
@@ -179,7 +177,6 @@ class ProductController extends Controller
         );
 
         $update = Product::find($request->id);
-
         $update->category = $request->cat_id;
         $update->sub_category = $request->subcat_id;
         $update->brand = $request->brand_id;
@@ -188,14 +185,9 @@ class ProductController extends Controller
         $update->discount = $request->discount;
         $update->selling_price = $request->selling_price;
         $update->buying_price = $request->buying_price;
-        $update->description = $request->description;
+        $update->description = $request->product_description;
 
-        $thumbnail = $request->file('thumbnail');
-        if ($thumbnail == true) {
-            $name_thumbnail = hexdec(uniqid()) . '.' . $thumbnail->getClientOriginalExtension();
-            Image::make($thumbnail)->resize(500, 500)->save('Image/product/' . $name_thumbnail);
-            $update->thumbnail = 'Image/product/' . $name_thumbnail;
-        }
+
         $images = $request->file('images');
         if($images == true){
             foreach ($images as $image) {
@@ -212,7 +204,8 @@ class ProductController extends Controller
                 'message' => 'data added successfully',
                 'alert-type' => 'success'
             );
-            return redirect('admin/product/attributes/edit/'.$update->id.'/'.urlencode(http_build_query($attributes->id)))->with($notification);
+            return redirect('admin/product/attributes/edit/'.$update->id)->with($notification);
+//            '/'.urlencode(http_build_query($attributes->id))
         }else{
             $notification = array(
                 'message' => 'something went wrong. please try again later.',

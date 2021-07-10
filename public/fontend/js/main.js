@@ -201,7 +201,7 @@ Created: Colorib
 			$('.product__big__img').attr({src: imgurl});
 		}
     });
-    
+
     /*-------------------
 		Quantity change
 	--------------------- */
@@ -223,13 +223,13 @@ Created: Colorib
 		}
 		$button.parent().find('input').val(newVal);
     });
-    
+
     /*-------------------
 		Radio Btn
 	--------------------- */
-    $(".size__btn label").on('click', function () {
-        $(".size__btn label").removeClass('active');
-        $(this).addClass('active');
-    });
+    // $(".size__btn label").on('click', function () {
+    //     $(".size__btn label").removeClass('active');
+    //     $(this).addClass('active');
+    // });
 
 })(jQuery);

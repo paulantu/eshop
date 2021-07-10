@@ -21,7 +21,7 @@
                                             <label>Product Buying Price :</label><span style="color: #0ba1b5">{{$products->buying_price}}</span><br>
                                         </div>
                                         <div class="col-6">
-                                            <span><img src="{{asset($products->thumbnail)}}" style="height: 100px; width: 100px"></span>
+                                            <span><img src="{{asset($image)}}" style="height: 100px; width: 100px"></span>
                                         </div>
                                     </div>
                                 </div>

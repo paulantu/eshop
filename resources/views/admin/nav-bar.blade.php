@@ -3,9 +3,9 @@
         @php
         $siteLogo = \App\Models\LogoHistory::latest('updated_at')->firstWhere('status', 1);
         @endphp
-        <a class="navbar-brand brand-logo mr-5" href="{{ url('/')}}">@if($siteLogo == true)<img src="{{ asset($siteLogo->logo)}}" class="mr-2" alt="logo"/>@else
+        <a class="navbar-brand brand-logo mr-5" href="{{ url('/')}}">@if($siteLogo == true)<img src="{{ asset($siteLogo->logo)}}" class="mr-2" alt="logo" style="height: 50px"/>@else
                 <i class="brand-logo">aPaul</i>@endif</a>
-        <a class="navbar-brand brand-logo-mini" href="{{ url('/')}}">@if($siteLogo == true)<img src="{{ asset($siteLogo->logo)}}" alt="logo"/>@else
+        <a class="navbar-brand brand-logo-mini" href="{{ url('/')}}">@if($siteLogo == true)<img src="{{ asset($siteLogo->logo)}}" alt="logo" style="height: 50px"/>@else
                 <i class="brand-logo">aPaul</i>@endif</a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
